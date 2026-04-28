@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI IT Support</title>
+</head>
+<body>
+
+<h2>IT Support Chatbot</h2>
+
+<input id="msg" placeholder="Type your issue..." />
+<button onclick="send()">Send</button>
+
+<p id="response"></p>
+
+<script>
+function send() {
+    let msg = document.getElementById("msg").value;
+
+    fetch("http://127.0.0.1:5000/chat", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({message: msg})
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("response").innerText = data.response;
+    });
+}
+</script>
+
+</body>
+</html>
